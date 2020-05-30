@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block corousal %}
+<br>
+{% endblock %}
+
+{% block content %}
+<br><br><br>
+    <main role="main" class="container">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+      </div>
+        <br>
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Available Commodities</a>
+          </nav>
+      <br>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Item Name</th>
+              <th>Available Quantity</th>
+              <th>Price ( /kg )</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for items in comodities %}
+            <tr>
+              <td>{{items.id}}</td>
+              <td>{{items.itemname}}</td>
+              <td>{{items.quantity}}</td>
+              <td>{{items.price}}</td>
+            </tr>
+          {%endfor%}
+          </tbody>
+        </table>
+      </div>
+        <hr>
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Place Order</a>
+          </nav>
+      <br>
+        <form action="/citizen_index" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=30) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=60) }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.phno.label }}<br>
+            {{ form.phno(size=10) }}<br>
+            {% for error in form.phno.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.address.label }}<br>
+            {{ form.address(size=90) }}<br>
+            {% for error in form.address.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.area.label }}<br>
+            {{ form.area(size=40) }}<br>
+            {% for error in form.area.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        </p>
+            {{ form.orderlist.label }}<br>
+            {{ form.orderlist(size=90) }}<br>
+            <span style="color: green;">[<b>format:</b> Rice Wheat etc]</span>
+            {% for error in form.orderlist.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+        </form>
+        <hr>
+        </main>
+<br><br>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+    feather.replace()
+    </script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block corousal %}
+<br>
+{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="container" align="center">
+    <h1>Edit Info</h1>
+    <br><br>
+    <form action="/add_commodities" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.commodity_name.label }}<br>
+            {{ form.commodity_name(size=20) }}<br>
+            {% for error in form.commodity_name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.amount.label }}<br>
+            {{ form.amount }}<br>
+            {% for error in form.amount.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.price.label }}<br>
+            {{ form.price }}<br>
+            {% for error in form.price.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}

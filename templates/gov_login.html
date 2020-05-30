@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block corousal %}
+<br>
+{% endblock %}
+
+{% block content %}
+<br><br>
+<div class="container" align="center">
+    <h1>Sign In</h1>
+    <br><br>
+    <form action="/gov_login" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=30) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=25) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember() }} {{ form.remember.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <!--<p>New User? <a href="{{ url_for('gov_register') }}">Click to Register!</a></p>-->
+</div>
+{% endblock %}

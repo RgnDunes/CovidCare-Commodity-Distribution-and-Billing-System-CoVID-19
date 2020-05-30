@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="icon" href="../static/images/CovidCare_title.png" type="image/icon type">
+    
+    <title>CovidCare</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="../static/images/CovidCare_Logo.JPG" width="100" height="55" alt="">
+        </a>
+        <a class="navbar-brand" href="/index"><font color="red"> CovidCare </font></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('about') }}">About</a>
+          </li>
+            {% if "seller_logged_in" not in session and "gov_logged_in" not in session %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="/gov_login">As Government Official</a>
+                        <a class="dropdown-item" href="/seller_login">As Cerified Seller</a>
+                        <a class="dropdown-item" href="/citizen_index">As Citizen</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                </li>
+            {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('portal') }}">Your Portal</a>
+          </li>
+        </ul>        
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    {% block corousal %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <hr><hr>
+    <footer class="page-footer font-small teal pt-4">
+      <div class="container">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-6">
+        <!--<div class="embed-responsive embed-responsive-16by9 mb-4">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/cRy5_KpPxyM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>-->
+      </div>
+    </div>
+  </div>
+    <div class="container text-center text-md-left">
+      <div class="row text-center text-md-left mt-3 pb-3">
+        <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold"><font color="red">CovidCare</font></h6>
+          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>This is my first website which uses <font color="green"><b>FLASK</b></font> as backend.</p>
+        </div>
+        <hr class="w-100 clearfix d-md-none">
+        <hr class="w-100 clearfix d-md-none">
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <a href="https://www.mygov.in/covid-19">Corona Virus Tracker</a>
+          </p>
+          <p>
+            <a href="https://www.who.int/"><abbr title="World Health Organization"> WHO</abbr></a>
+          </p>
+        </div>
+        <hr class="w-100 clearfix d-md-none">
+        <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+          <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+          <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+          <p>
+            <i class="fas fa-home mr-3"><a href="https://kiit.ac.in/"></i> KIIT University</a></p>
+          <p>
+            <i class="fas fa-envelope mr-3"><a href="mailto:1805661@gmail.com"> 1805661@gmail.com</a></i></p>
+          <p>
+            <i class="fas fa-phone mr-3"></i> 7394926646</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row d-flex align-items-center">
+        <div class="col-md-7 col-lg-8">
+          <p class="text-center text-md-left">
+            <a href="#">
+              <font color="red"><strong>Designed By - Divyansh Singh</strong></font>
+            </a>
+          </p>
+        </div>
+        <div class="col-md-5 col-lg-4 ml-lg-0">
+          <div class="text-center text-md-right">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/profile.php?id=100026357103811&ref=br_tf&epa=SEARCH_BOX"  class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href='https://www.instagram.com/divyansh8169/?igshid=1ayhewfd1fgie'  class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="www.linkedin.com/in/divyansh-singh-8137201a2" class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://twitter.com/RgnDunes" class="btn-floating btn-sm rgba-white-slight mx-1">
+                  <i class="fab fa-twitter-square"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr width="88%" align="center">
+    <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Back to top</a>
+          </p>
+          <p>This webpage is &copy; CovidCare</p>
+          <p>Want to join ? Download <a href="https://www.mygov.in/aarogya-setu-app/">Arogya Setu app.</a>.</p>
+        </div>
+      </footer>
+  </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+</body>
+</html>

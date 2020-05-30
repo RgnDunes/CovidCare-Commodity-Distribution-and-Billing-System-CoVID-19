@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block corousal %}
+<br>
+{% endblock %}
+
+{% block content %}
+<br><br><br><br>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Welcome {{session["gov_logged_in"]}}</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="/gov_index">
+                  <span data-feather="home"></span>
+                  Dashboard <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#sellerlist">
+                  <span data-feather="file"></span>
+                  All Sellers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#officerlist">
+                  <span data-feather="file"></span>
+                  All Gov Officers
+                </a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/gov_register">
+                  <span data-feather="file"></span>
+                  + Add Gov Officer
+                </a>
+              </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/seller_register">
+                  <span data-feather="file"></span>
+                  + Add Seller
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <a name="sellerlist"></a>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+          </div>
+            
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Seller's List</a>
+          </nav>
+      <br>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Seller Name</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Allocated Area</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for items in sellers %}
+                <tr>
+                  <td>{{items.id}}</td>
+                  <td>{{items.username}}</td>
+                  <td>{{items.email}}</td>
+                  <td>{{items.password}}</td>
+                  <td>{{items.area}}</td>
+                </tr>
+              {%endfor%}
+              </tbody>
+            </table>
+          </div>
+          <hr>
+        <form action="/delete" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.id.label }}<br>
+            {{ form.id(size=7) }}
+            {% for error in form.id.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            <p>{{ form.submit() }}</p>
+        </p>
+        </form>
+        <a name="officerlist"></a>
+        <hr>
+            <a class="btn btn-success" href="/edit_seller" role="button" id="Edit" name="Edit">Edit</a>
+        <br><hr>
+
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Government Officer's List</a>
+          </nav>
+        <br>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Officer Name</th>
+                <th>Email</th>
+                <th>Password</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for items in officers %}
+              <tr>
+                <td>{{items.id}}</td>
+                <td>{{items.username}}</td>
+                <td>{{items.email}}</td>
+                <td>{{items.password}}</td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+        </div>
+
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">All Commits</a>
+          </nav>
+        <br>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Commit</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for items in commits %}
+              <tr>
+                <td>{{items.id}}</td>
+                <td>{{items.commit_text}}</td>
+              </tr>
+            {%endfor%}
+            </tbody>
+          </table>
+        </div>
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+{% endblock %}
